@@ -102,6 +102,11 @@ func parse(stdout string) common.ResourceInfo {
 }
 
 func parseRowValue(row string) (string, string) {
+	// http://www.commandlinefu.com/commands/view/3584/remove-color-codes-special-characters-with-sed
+	reg := regexp.MustCompile(`\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]`)
+	row = string(reg.ReplaceAll([]byte(row), []byte("")))
+
 	tmp := strings.Split(row, ":")
+
 	return tmp[0], strings.TrimSpace(tmp[1])
 }
