@@ -1,3 +1,4 @@
 /.idea
 /steamer
 *.swp
+/httpHandler/go-bindata.go

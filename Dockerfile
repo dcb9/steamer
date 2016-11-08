@@ -33,21 +33,22 @@ RUN set -ex \
 
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+WORKDIR $GOPATH
 
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
 
 RUN apk add --no-cache git
 
-RUN go get github.com/gorilla/websocket
+RUN go get github.com/gorilla/websocket github.com/jteeuwen/go-bindata/...
 
 COPY . /go/src/github.com/dcb9/steamer/
 
 RUN cd /go/src/github.com/dcb9/steamer \
+  ; go-bindata -o httpHandler/go-bindata.go -pkg httpHandler views \
   ; go get && go install
 
 COPY run.sh /
 
 EXPOSE 8080
 ENTRYPOINT []
-WORKDIR /go/src/github.com/dcb9/steamer
