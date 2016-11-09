@@ -1,0 +1,20 @@
+version: '2'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_USER=root
+      - DB_PASS=
+      - DB_HOST=
+      - DB_PORT=3306
+      - DB_NAME=
+      - DB_MAX_OPEN=200
+      - DB_MAX_IDLE=100
+      - OUTPUT_DIR=/downloads
+      - SS_HOST=
+      - SS_PORT=8388
+      - SS_PASS=
+    #volumes:
+      #- somewhere:/downloads

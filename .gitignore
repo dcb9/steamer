@@ -2,3 +2,4 @@
 /steamer
 *.swp
 /httpHandler/go-bindata.go
+/docker-compose.yml
