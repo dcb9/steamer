@@ -9,9 +9,9 @@ import (
 func TestFetchInfo(t *testing.T) {
 	wantStreams := make(map[string]common.Stream)
 	youkuStreams := map[string]YoukuStream{
-		"flvhd": {"flvhd", "flv", "标清", 28090073},
-		"hd2":   {"hd2", "flv", "超清", 117577724},
-		"mp4":   {"mp4", "mp4", "高清", 53866594},
+		"flvhd": {"flvhd", "flv", "标清", 29302137},
+		"hd2":   {"hd2", "flv", "超清", 119460964},
+		"mp4":   {"mp4", "mp4", "高清", 55709017},
 	}
 	for key, stream := range youkuStreams {
 		wantStreams[key] = stream

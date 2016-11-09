@@ -7,32 +7,20 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>Steamer</title>
 
-    <link href="http://d.phpor.me/jLFJ+" , rel="stylesheet">
+    <link href="http://7xji7p.com1.z0.glb.clouddn.com/xterm.css" , rel="stylesheet">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
     <link href="http://v3.bootcss.com/examples/cover/cover.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <style>
-        li {
-            text-align: left;
-        }
-    </style>
     <script>
-
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
         function getUid() {
             return parseInt(Date.now() / 1000).toString() + getRandomInt(100, 999);
         }
+
         var url;
         var resId;
 
@@ -58,14 +46,10 @@
                 }
             };
             ws.onclose = function () {
-                setTimeout(function () {
-                    startWs();
-                }, 5000);
+                alert("Connect to server error, please REFRESH page.")
             };
             ws.onerror = function () {
-                setTimeout(function () {
-                    startWs();
-                }, 1000);
+                alert("Connect to server error, please REFRESH page.")
             };
         }
 
@@ -74,7 +58,7 @@
             var p = $('#progress-container');
             p.html("");
             var row1 = "<p>Task Id: " + jsonData.task_id + " Finished.</p>";
-            var row2 = "<p>Video Url: http://{{$}}" + jsonData.video_url + "</p>"
+            var row2 = "<h3><a href='http://{{$}}" + jsonData.video_url + "' target='_blank'>视频 URL</a></h3>"
             $("<p>").html(row1 + row2).appendTo(p);
             p.show();
         };
@@ -151,6 +135,7 @@
     </script>
 </head>
 <body>
+<a href="https://github.com/dcb9/steamer"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
 <div class="site-wrapper">
     <div class="site-wrapper-inner">
         <div class="cover-container">
@@ -198,7 +183,7 @@
 
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="http://d.phpor.me/MQqC+"></script>
+<script src="http://7xji7p.com1.z0.glb.clouddn.com/xterm.js"></script>
 
 <script>
     $('#search').click(doSearch)
