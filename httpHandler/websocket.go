@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"os"
 	"github.com/dcb9/steamer/worker"
+	"github.com/dcb9/steamer/app"
 )
 
 const (
@@ -48,7 +48,7 @@ func WebSocket(conn *websocket.Conn, w http.ResponseWriter, r *http.Request) {
 	ticker := time.NewTicker(pingPeriod)
 	initConn(conn)
 
-	outputDir := os.Getenv("OUTPUT_DIR")
+	outputDir := app.OutputDir
 	downloadHub := worker.DownloadHub{
 		Add: make(chan *worker.DownloadTask),
 		Finished: make(chan *worker.DownloadTask),

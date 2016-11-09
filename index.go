@@ -4,9 +4,9 @@ import (
 	"flag"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/dcb9/steamer/httpHandler"
+	"github.com/dcb9/steamer/app"
 	"github.com/gorilla/websocket"
 )
 
@@ -20,7 +20,7 @@ func main() {
 	flag.Parse()
 
 	http.Handle("/", http.HandlerFunc(httpHandler.Index))
-	http.Handle("/r/", http.StripPrefix("/r/", http.FileServer(http.Dir(os.Getenv("OUTPUT_DIR")))))
+	http.Handle("/r/", http.StripPrefix("/r/", http.FileServer(http.Dir(app.OutputDir))))
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {

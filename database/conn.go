@@ -5,17 +5,26 @@ import (
 	"database/sql"
 	"log"
 	"fmt"
-	"os"
+	"github.com/dcb9/steamer/app"
 )
 
 var Db *sql.DB
 
-func Conn(username, password, protocleAddr, dbname, charset string) (*sql.DB) {
+func Conn(p app.DbParams) (*sql.DB) {
 	if Db == nil {
-		conn, err := sql.Open("mysql", username + ":" + password + "@" + protocleAddr + "/" + dbname + "?charset=" + charset)
+		source := fmt.Sprintf(
+			"%s:%s@%s/%s?charset=%s",
+			p.User, p.Pass, p.ProtocleAddr, p.Name, p.Charset,
+		);
+		conn, err := sql.Open("mysql", source)
 		if err != nil {
 			log.Fatalf("Connect mysql error: %q", err)
 		}
+		err = conn.Ping()
+		if err != nil {
+			log.Fatalf("Ping mysql error: %q", err)
+		}
+
 		Db = conn
 		fmt.Println("======= sql.Open ======")
 	}
@@ -24,12 +33,8 @@ func Conn(username, password, protocleAddr, dbname, charset string) (*sql.DB) {
 }
 
 func init() {
-	Conn(
-		os.Getenv("DB_USER"), os.Getenv("DB_PASS"),
-		"tcp(" + os.Getenv("DB_HOST") + ":" + os.Getenv("DB_PORT") + ")",
-		os.Getenv("DB_NAME"), "utf8mb4,utf8",
-	)
+	Conn(app.MyDbParams)
 
-	Db.SetMaxOpenConns(200)
-	Db.SetMaxIdleConns(100)
+	Db.SetMaxOpenConns(app.MyDbParams.MaxOpen)
+	Db.SetMaxIdleConns(app.MyDbParams.MaxIdle)
 }
